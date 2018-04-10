@@ -1,0 +1,6 @@
+-variant shogi
+-boardHeight 5
+-boardWidth 5
+-holdingsSize 5
+-pieceToCharTable "P.BR.S...G.+.++.+Kp.br.s...g.+.++.+k"
+-fcp shokidoki
