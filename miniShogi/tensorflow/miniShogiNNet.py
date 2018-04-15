@@ -4,7 +4,7 @@ from utils import *
 
 import tensorflow as tf
 
-class OthelloNNet():
+class miniShogiNNet():
     def __init__(self, game, args):
         # game params
         self.board_x, self.board_y = game.getBoardSize()
