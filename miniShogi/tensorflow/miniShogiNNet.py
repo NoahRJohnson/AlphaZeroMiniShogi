@@ -41,7 +41,11 @@ class miniShogiNNet():
             self.v = Tanh(Dense(s_fc2, 1))                                                               # batch_size x 1
 
             self.calculate_loss()
-
+# kernel size should be odd
+# for nice properties
+# noah doesn't say what nice is
+# filters are odd because it's good for edge detection n shit
+# TODO: figure out what nice is as presentation-bait
     def conv2d(self, x, out_channels, padding):
       return tf.layers.conv2d(x, out_channels, kernel_size=[3,3], padding=padding)
 
