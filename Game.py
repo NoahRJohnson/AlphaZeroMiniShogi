@@ -4,9 +4,7 @@ class Game():
     this class and implement the functions below. This works when the game is
     two-player, adversarial and turn-based.
 
-    Use 1 for player1 and -1 for player2.
-
-    See othello/OthelloGame.py for an example implementation.
+    See miniShogi/miniShogiGame.py for an example implementation.
     """
     def __init__(self):
         pass
