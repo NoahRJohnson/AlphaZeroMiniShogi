@@ -8,6 +8,9 @@ class miniShogiNNet():
     def __init__(self, game, args):
         # game params
         self.board_x, self.board_y = game.getBoardSize()
+        self.feature_planes = 250#game.getFeaturePlaneNumber()
+        # length of the vector of possible actions
+        # For us it'll be the number of planes (69)
         self.action_size = game.getActionSize()
         self.args = args
 
@@ -21,11 +24,11 @@ class miniShogiNNet():
         # Neural Net
         self.graph = tf.Graph()
         with self.graph.as_default(): 
-            self.input_boards = tf.placeholder(tf.float32, shape=[None, self.board_x, self.board_y])    # s: batch_size x board_x x board_y
+            self.input_boards = tf.placeholder(tf.float32, shape=[None, self.board_x, self.board_y, self.feature_planes])    # s: batch_size x board_x x board_y
             self.dropout = tf.placeholder(tf.float32)
             self.isTraining = tf.placeholder(tf.bool, name="is_training")
 
-            x_image = tf.reshape(self.input_boards, [-1, self.board_x, self.board_y, 1])                    # batch_size  x board_x x board_y x 1
+            x_image = tf.reshape(self.input_boards, [-1, self.board_x, self.board_y, self.feature_planes])                    # batch_size  x board_x x board_y x 1 (channel???)
             h_conv1 = Relu(BatchNormalization(self.conv2d(x_image, args.num_channels, 'same'), axis=3, training=self.isTraining))     # batch_size  x board_x x board_y x num_channels
             h_conv2 = Relu(BatchNormalization(self.conv2d(h_conv1, args.num_channels, 'same'), axis=3, training=self.isTraining))     # batch_size  x board_x x board_y x num_channels
             h_conv3 = Relu(BatchNormalization(self.conv2d(h_conv2, args.num_channels, 'valid'), axis=3, training=self.isTraining))    # batch_size  x (board_x-2) x (board_y-2) x num_channels
