@@ -1,4 +1,4 @@
-# AlphaReZero
+# AlphaZeroMiniShogi
 Applying the Alpha-Zero self-play framework to Mini Shogi.
 
 [The AlphaZero paper.](https://arxiv.org/pdf/1712.01815.pdf)
