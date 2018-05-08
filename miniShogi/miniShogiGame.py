@@ -35,6 +35,11 @@ class miniShogiGame(Game):
         b.execute_move(move, player)
         return (b.pieces, -player)
 
+    # Returns a policy with the invalid moves removed,
+    # and the probabilities renormalized
+    def maskInvalidMoves(self, policy, board):
+        
+        
     def getValidMoves(self, board, player):
         # return a fixed size binary vector
         valids = [0]*self.getActionSize()
@@ -65,24 +70,8 @@ class miniShogiGame(Game):
         # return state if player==1, else return -state if player==-1
         return player*board
 
-    def getSymmetries(self, board, pi):
-        # mirror, rotational
-        assert(len(pi) == self.n**2+1)  # 1 for pass
-        pi_board = np.reshape(pi[:-1], (self.n, self.n))
-        l = []
-
-        for i in range(1, 5):
-            for j in [True, False]:
-                newB = np.rot90(board, i)
-                newPi = np.rot90(pi_board, i)
-                if j:
-                    newB = np.fliplr(newB)
-                    newPi = np.fliplr(newPi)
-                l += [(newB, list(newPi.ravel()) + [pi[-1]])]
-        return l
-
     def stringRepresentation(self, board):
-        # 8x8 numpy array (canonical board)
+        # 5x5 numpy array (canonical board)
         return board.tostring()
 
     def getScore(self, board, player):
